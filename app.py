@@ -1,7 +1,10 @@
+# app.py
 from flask import Flask, request, jsonify
 import pickle
+from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Function to predict whether text is AI or human
 def predict(text):
@@ -30,6 +33,7 @@ def predict(text):
 
     return ai_probability, human_probability
 
+# Route to handle prediction API
 @app.route('/predict', methods=['POST'])
 def predict_api():
     data = request.get_json()
@@ -44,7 +48,6 @@ def predict_api():
         return jsonify(response)
     else:
         return jsonify({"error": "Prediction failed"}), 500
-        
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
 
+if __name__ == '__main__':
+    app.run(debug=True, port=4000)

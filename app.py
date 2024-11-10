@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask, request, jsonify
 import pickle
 from flask_cors import CORS  # Import CORS
